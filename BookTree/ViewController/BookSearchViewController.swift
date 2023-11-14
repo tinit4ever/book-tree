@@ -40,8 +40,6 @@ class BookSearchViewController: UIViewController {
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
-        
-        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -94,7 +92,13 @@ extension BookSearchViewController: UISearchBarDelegate {
 }
 
 extension BookSearchViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let bookURL = bookSearchViewModel.books[indexPath.row].selfLink
+        
+        let bookDetailViewController = BookDetailViewController(bookDetailViewModel: BookDetailViewModel(apiCaller: APICaller()))
+        bookDetailViewController.selectedUrl = bookURL
+        self.present(bookDetailViewController, animated: true)
+    }
 }
 
 extension BookSearchViewController: UITableViewDataSource {

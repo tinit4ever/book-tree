@@ -20,6 +20,8 @@
 		139DC1C62B02275600B03F7A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139DC1C52B02275600B03F7A /* HomeViewController.swift */; };
 		139DC1C82B022D4D00B03F7A /* VCPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139DC1C72B022D4D00B03F7A /* VCPreview.swift */; };
 		139DC1CA2B022F1B00B03F7A /* BookCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139DC1C92B022F1B00B03F7A /* BookCollectionViewCell.swift */; };
+		13DE94202B035D23003DCA03 /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DE941F2B035D23003DCA03 /* BookDetailViewController.swift */; };
+		13DE94222B035DD1003DCA03 /* BookDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DE94212B035DD1003DCA03 /* BookDetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		139DC1C52B02275600B03F7A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		139DC1C72B022D4D00B03F7A /* VCPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCPreview.swift; sourceTree = "<group>"; };
 		139DC1C92B022F1B00B03F7A /* BookCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCollectionViewCell.swift; sourceTree = "<group>"; };
+		13DE941F2B035D23003DCA03 /* BookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
+		13DE94212B035DD1003DCA03 /* BookDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				1372A6B72B0312E100ACF1E6 /* BookSearchViewModel.swift */,
+				13DE94212B035DD1003DCA03 /* BookDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -123,6 +128,7 @@
 			children = (
 				139DC1C52B02275600B03F7A /* HomeViewController.swift */,
 				1372A6AC2B03041F00ACF1E6 /* BookSearchViewController.swift */,
+				13DE941F2B035D23003DCA03 /* BookDetailViewController.swift */,
 				139DC1C72B022D4D00B03F7A /* VCPreview.swift */,
 			);
 			path = ViewController;
@@ -208,6 +214,8 @@
 			files = (
 				139DC1C82B022D4D00B03F7A /* VCPreview.swift in Sources */,
 				1372A6B62B0310A700ACF1E6 /* String+Extensions.swift in Sources */,
+				13DE94202B035D23003DCA03 /* BookDetailViewController.swift in Sources */,
+				13DE94222B035DD1003DCA03 /* BookDetailViewModel.swift in Sources */,
 				138F1BDB2B021ABF007BC8F9 /* BookTree.xcdatamodeld in Sources */,
 				139DC1C62B02275600B03F7A /* HomeViewController.swift in Sources */,
 				139DC1CA2B022F1B00B03F7A /* BookCollectionViewCell.swift in Sources */,

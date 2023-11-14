@@ -13,9 +13,11 @@ struct BookAPIResponse: Decodable {
 
 struct BookAPI: Decodable {
     let kind: String
+    let selfLink: String
     let volumeInfo: VolumeInfo
 }
 
 struct VolumeInfo: Decodable {
     let title: String
+    let description: String
 }

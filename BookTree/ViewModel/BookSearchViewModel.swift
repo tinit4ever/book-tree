@@ -36,7 +36,7 @@ class BookSearchViewModel {
     }
     
     func loadBook(search: String) {
-        apiCaller.fetchMovies(search: search)
+        apiCaller.fetchBooks(search: search)
             .sink { completion in
                 switch completion {
                 case .finished:
