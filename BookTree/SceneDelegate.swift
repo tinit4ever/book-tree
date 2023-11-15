@@ -22,7 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //        let bookSearchViewController = BookSearchViewController(bookSearchViewModel: BookSearchViewModel(apiCaller: APICaller()))
         //        let navigationViewController = UINavigationController(rootViewController: bookSearchViewController)
         //        window.rootViewController = navigationViewController
-        let rootViewController = BookSearchViewController(bookSearchViewModel: BookSearchViewModel(apiCaller: APICaller()))
+//        let rootViewController = BookSearchViewController(bookSearchViewModel: BookSearchViewModel(apiCaller: APICaller()))
+        let rootViewController = BookDetailViewController()
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
         self.window = window

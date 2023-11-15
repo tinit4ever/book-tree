@@ -92,13 +92,13 @@ extension BookSearchViewController: UISearchBarDelegate {
 }
 
 extension BookSearchViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let bookURL = bookSearchViewModel.books[indexPath.row].selfLink
-        
-        let bookDetailViewController = BookDetailViewController(bookDetailViewModel: BookDetailViewModel(apiCaller: APICaller()))
-        bookDetailViewController.selectedUrl = bookURL
-        self.present(bookDetailViewController, animated: true)
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let bookURL = bookSearchViewModel.books[indexPath.row].selfLink
+//        
+//        let bookDetailViewController = BookDetailViewController(bookDetailViewModel: BookDetailViewModel(apiCaller: APICaller()))
+//        bookDetailViewController.selectedUrl = bookURL
+//        self.navigationController?.pushViewController(bookDetailViewController, animated: true)
+//    }
 }
 
 extension BookSearchViewController: UITableViewDataSource {
@@ -108,12 +108,10 @@ extension BookSearchViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let book = bookSearchViewModel.books[indexPath.row]
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        print(book.volumeInfo.title)
         var content = cell.defaultContentConfiguration()
-        content.text = book.volumeInfo.title
+        content.text = book.volumeInfo?.title
         cell.contentConfiguration = content
         return cell
     }

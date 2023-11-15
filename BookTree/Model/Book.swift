@@ -12,12 +12,17 @@ struct BookAPIResponse: Decodable {
 }
 
 struct BookAPI: Decodable {
-    let kind: String
-    let selfLink: String
-    let volumeInfo: VolumeInfo
+    let kind: String?
+    let selfLink: String?
+    let volumeInfo: VolumeInfo?
 }
 
 struct VolumeInfo: Decodable {
-    let title: String
-    let description: String
+    let title: String?
+    let authors: [String]?
+    let publisher: String?
+    let description: String?
+    let pageCount: Int?
+    let categories: [String]?
+    let thumbnail: String?
 }

@@ -28,7 +28,7 @@ class BookSearchViewModel {
     
     func setupSearchPublisher() {
         searchSubject
-            .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
+            .debounce(for: .seconds(1), scheduler: DispatchQueue.main)
             .sink { [weak self] searchText in
                 self?.loadBook(search: searchText)
             }
