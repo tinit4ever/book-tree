@@ -102,15 +102,15 @@ class ViewController: UIViewController {
     // Catch Action
     @objc
     func signUpButtonTapped() {
-//        let signUpViewController = SignUpViewController()
-//        self.navigationController?.pushViewController(signUpViewController, animated: true)
+        let signUpViewController = SignUpViewController()
+        self.navigationController?.pushViewController(signUpViewController, animated: true)
     }
     
     @objc
     func loginButtonTapped() {
-//        let loginViewController = LoginViewController()
-//        loginViewController.setViewModel(viewModel: LoginViewModel())
-//        self.navigationController?.pushViewController(loginViewController, animated: true)
+        let loginViewController = LoginViewController()
+        loginViewController.setViewModel(viewModel: LoginViewModel())
+        self.navigationController?.pushViewController(loginViewController, animated: true)
     }
 }
 

@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+struct UserDefaultKeys {
+    static let isLoggedIn:String = "isLoggedIn"
+}

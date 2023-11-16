@@ -4,34 +4,52 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
-        <scene sceneID="Bai-pL-BqX">
+        <scene sceneID="4x6-O3-FiE">
             <objects>
-                <viewController id="bJg-J4-hcO" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="CWW-7x-wmp">
+                <viewController id="ae7-9F-jMf" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rQK-D2-fpZ">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="Wli-nZ-gCK"/>
-                        <color key="backgroundColor" systemColor="systemGray6Color"/>
-                        <color key="tintColor" systemColor="systemGray5Color"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ho0-r3-2Px">
+                                <rect key="frame" x="0.0" y="59" width="393" height="159"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NAImage" translatesAutoresizingMaskIntoConstraints="NO" id="IOj-jf-l48">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="159"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" name="AccentColor"/>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="mhf-mz-TKC"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="mhf-mz-TKC" firstAttribute="bottom" secondItem="Ho0-r3-2Px" secondAttribute="bottom" constant="600" id="8LB-Nc-M8A"/>
+                            <constraint firstItem="Ho0-r3-2Px" firstAttribute="top" secondItem="mhf-mz-TKC" secondAttribute="top" id="Lgf-NE-BpD"/>
+                            <constraint firstItem="Ho0-r3-2Px" firstAttribute="leading" secondItem="mhf-mz-TKC" secondAttribute="leading" id="ayd-WI-pUa"/>
+                            <constraint firstItem="mhf-mz-TKC" firstAttribute="trailing" secondItem="Ho0-r3-2Px" secondAttribute="trailing" id="lal-ar-vpk"/>
+                        </constraints>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="brS-ZD-1B0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FWd-YO-sf4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1139" y="29"/>
+            <point key="canvasLocation" x="-1350" y="8"/>
         </scene>
     </scenes>
     <resources>
-        <systemColor name="systemGray5Color">
-            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGray6Color">
-            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <image name="NAImage" width="550" height="550"/>
+        <namedColor name="AccentColor">
+            <color red="1" green="0.79199999570846558" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>

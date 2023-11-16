@@ -17,13 +17,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        
-        let window = UIWindow(windowScene: windowScene)
-        let bookSearchViewController = BookSearchViewController(bookSearchViewModel: BookSearchViewModel(apiCaller: APICaller()))
-        let navigationViewController = UINavigationController(rootViewController: bookSearchViewController)
-        window.rootViewController = navigationViewController
-        window.makeKeyAndVisible()
-        self.window = window
+        window = UIWindow(windowScene: windowScene)
+        setRootViewController(for: window)
+        window?.makeKeyAndVisible()
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -55,6 +51,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // Save changes in the application's managed object context when the application transitions to the background.
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+    }
+    
+    func setRootViewController(for window: UIWindow?) {
+        let isUserLoggedIn = UserDefaults.standard.bool(forKey: UserDefaultKeys.isLoggedIn)
+        
+        let rootViewController: UIViewController
+        
+        if isUserLoggedIn {
+            let mainViewController = MainTabBarViewController()
+            rootViewController = mainViewController
+        } else {
+            let viewController = ViewController() as ViewController
+            rootViewController = UINavigationController(rootViewController: viewController)
+        }
+        
+        window?.rootViewController = rootViewController
     }
 }
 

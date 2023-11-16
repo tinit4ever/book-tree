@@ -6,24 +6,40 @@
 //
 
 import UIKit
-
+import SwiftUI
 class MainTabBarViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setupUI()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func setupUI() {
+        view.backgroundColor = .black
+        
+        let homeViewController = HomeViewController()
+        let homeNavagationController = UINavigationController(rootViewController: homeViewController)
+        
+        let bookSearchViewController = BookSearchViewController(bookSearchViewModel: BookSearchViewModel(apiCaller: APICaller()))
+        let bookSearchNavagationController = UINavigationController(rootViewController: bookSearchViewController)
+        
+        homeNavagationController.tabBarItem.image = UIImage(systemName: "book.closed.fill")
+        bookSearchNavagationController.tabBarItem.image = UIImage(systemName: "magnifyingglass")
+        
+        homeNavagationController.title = "Home"
+        bookSearchNavagationController.title = "Search"
+        
+        setViewControllers([bookSearchNavagationController, homeNavagationController], animated: true)
     }
-    */
-
 }
+
+// -MARK: Preview
+struct MainViewControllerPreview: PreviewProvider {
+    static var previews: some View {
+        VCPreview {
+            let mainViewController = MainTabBarViewController()
+            return mainViewController
+        }
+    }
+}
+

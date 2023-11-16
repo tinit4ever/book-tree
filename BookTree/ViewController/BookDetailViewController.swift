@@ -12,6 +12,7 @@ import SDWebImage
 
 class BookDetailViewController: UIViewController {
     var book: BookAPI?
+    var imageViewHeightConstraint: NSLayoutConstraint!
     // MARK: - Create UI Component
     
     lazy var stackView: UIStackView = {
@@ -152,6 +153,7 @@ class BookDetailViewController: UIViewController {
         scrollView.showsVerticalScrollIndicator = true
         scrollView.layer.cornerRadius = 20
         scrollView.backgroundColor = .systemGray6
+        scrollView.delegate = self
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
@@ -222,9 +224,11 @@ class BookDetailViewController: UIViewController {
     
     func setupImageView() {
         NSLayoutConstraint.activate([
-            imageView.heightAnchor.constraint(equalToConstant: 182),
+            //            imageView.heightAnchor.constraint(equalToConstant: 182),
             imageView.widthAnchor.constraint(equalToConstant: 120),
         ])
+        imageViewHeightConstraint = imageView.heightAnchor.constraint(equalToConstant: 182)
+        imageViewHeightConstraint.isActive = true
     }
     
     func setupTitleAndAuthorLabel() {
@@ -267,7 +271,6 @@ class BookDetailViewController: UIViewController {
     }
     
     //     MARK: - Setup Data
-    
     func setupData() {
         if let url = URL(string: (book?.volumeInfo?.imageLinks!.thumbnail) ?? "") {
             imageView.sd_setImage(with: url)
@@ -283,6 +286,50 @@ class BookDetailViewController: UIViewController {
         releaseContentLabel.text = String(releaseDateString.prefix(4))
         descriptionLabel.text = book?.volumeInfo?.description ?? "N/A"
     }
+}
+
+extension BookDetailViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset.y
+        
+        let minHeight: CGFloat = 0
+        let maxHeight: CGFloat = 182
+        
+        var newHeight = maxHeight - offset
+        newHeight = max(minHeight, newHeight)
+        
+        imageViewHeightConstraint.isActive = false
+        
+        imageViewHeightConstraint = imageView.heightAnchor.constraint(equalToConstant: newHeight)
+        imageViewHeightConstraint.isActive = true
+        
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+            let offset = scrollView.contentOffset.y
+            let contentHeight = scrollView.contentSize.height
+            let scrollViewHeight = scrollView.frame.size.height
+
+            if offset <= 0 {
+                handleScrollToTop()
+            } else if offset >= contentHeight - scrollViewHeight {
+                handleScrollToBottom()
+            }
+        }
+
+        func handleScrollToTop() {
+            imageViewHeightConstraint.isActive = false
+            
+            imageViewHeightConstraint = imageView.heightAnchor.constraint(equalToConstant: 182)
+            imageViewHeightConstraint.isActive = true
+        }
+
+        func handleScrollToBottom() {
+            imageViewHeightConstraint.isActive = false
+            
+            imageViewHeightConstraint = imageView.heightAnchor.constraint(equalToConstant: 0)
+            imageViewHeightConstraint.isActive = true
+        }
 }
 
 // -MARK: Preview

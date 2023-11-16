@@ -20,13 +20,14 @@ struct BookAPI: Decodable {
 struct VolumeInfo: Decodable {
     let title: String?
     let authors: [String]?
-    let publisher: String?
+//    let publisher: String?
     let description: String?
     let pageCount: Int?
     let categories: [String]?
     let imageLinks: ImageLink?
     let publishedDate: String?
     let language: String?
+    let averageRating: Double?
 }
 
 struct ImageLink: Decodable {
