@@ -49,4 +49,21 @@ class BookDetailViewModel {
             }
             .store(in: &cancellables)
     }
+    
+    func removeHTMLTags(from string: String) -> String {
+        guard let data = string.data(using: .utf8) else { return string }
+        do {
+            let attributedString = try NSAttributedString(
+                data: data,
+                options: [
+                    .documentType: NSAttributedString.DocumentType.html,
+                    .characterEncoding: String.Encoding.utf8.rawValue
+                ],
+                documentAttributes: nil
+            )
+            return attributedString.string
+        } catch {
+            return string
+        }
+    }
 }

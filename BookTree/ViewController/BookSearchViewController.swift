@@ -46,6 +46,13 @@ class BookSearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let famillyNames = UIFont.familyNames
+        
+        for famillyName in famillyNames {
+            print("Family: \(famillyName)")
+        }
+        
         setupUI()
         setupData()
     }
@@ -92,13 +99,14 @@ extension BookSearchViewController: UISearchBarDelegate {
 }
 
 extension BookSearchViewController: UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let bookURL = bookSearchViewModel.books[indexPath.row].selfLink
-//        
-//        let bookDetailViewController = BookDetailViewController(bookDetailViewModel: BookDetailViewModel(apiCaller: APICaller()))
-//        bookDetailViewController.selectedUrl = bookURL
-//        self.navigationController?.pushViewController(bookDetailViewController, animated: true)
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let book = bookSearchViewModel.books[indexPath.row]
+        
+        let bookDetailViewController = BookDetailViewController()
+        bookDetailViewController.book = book
+        
+        self.navigationController?.pushViewController(bookDetailViewController, animated: true)
+    }
 }
 
 extension BookSearchViewController: UITableViewDataSource {

@@ -43,6 +43,7 @@ class APICaller {
     }
     
     func fetchBookDetails(urlString: String) -> AnyPublisher<BookAPI, Error> {
+        print(urlString)
         guard let url = URL(string: urlString) else {
             return Fail(error: APIError.failedToGetData).eraseToAnyPublisher()
         }

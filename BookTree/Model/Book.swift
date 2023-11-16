@@ -24,5 +24,11 @@ struct VolumeInfo: Decodable {
     let description: String?
     let pageCount: Int?
     let categories: [String]?
+    let imageLinks: ImageLink?
+    let publishedDate: String?
+    let language: String?
+}
+
+struct ImageLink: Decodable {
     let thumbnail: String?
 }

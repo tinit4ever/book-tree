@@ -19,12 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
-        //        let bookSearchViewController = BookSearchViewController(bookSearchViewModel: BookSearchViewModel(apiCaller: APICaller()))
-        //        let navigationViewController = UINavigationController(rootViewController: bookSearchViewController)
-        //        window.rootViewController = navigationViewController
-//        let rootViewController = BookSearchViewController(bookSearchViewModel: BookSearchViewModel(apiCaller: APICaller()))
-        let rootViewController = BookDetailViewController()
-        window.rootViewController = rootViewController
+        let bookSearchViewController = BookSearchViewController(bookSearchViewModel: BookSearchViewModel(apiCaller: APICaller()))
+        let navigationViewController = UINavigationController(rootViewController: bookSearchViewController)
+        window.rootViewController = navigationViewController
         window.makeKeyAndVisible()
         self.window = window
     }

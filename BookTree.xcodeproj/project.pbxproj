@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		130B4E342B04876000DBFD57 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 130B4E332B04876000DBFD57 /* SDWebImage */; };
+		130B4E362B04876000DBFD57 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 130B4E352B04876000DBFD57 /* SDWebImageMapKit */; };
+		130D91442B04C80A009A0BF1 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 130D91432B04C80A009A0BF1 /* AlamofireImage */; };
+		132C84E52B050E6900D49A21 /* Baskerville.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 132C84E42B050E6900D49A21 /* Baskerville.ttc */; };
 		1372A6AD2B03041F00ACF1E6 /* BookSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1372A6AC2B03041F00ACF1E6 /* BookSearchViewController.swift */; };
 		1372A6B32B030F1A00ACF1E6 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1372A6B22B030F1A00ACF1E6 /* Book.swift */; };
 		1372A6B82B0312E100ACF1E6 /* BookSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1372A6B72B0312E100ACF1E6 /* BookSearchViewModel.swift */; };
@@ -26,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		132C84E42B050E6900D49A21 /* Baskerville.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Baskerville.ttc; sourceTree = "<group>"; };
 		1372A6AC2B03041F00ACF1E6 /* BookSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchViewController.swift; sourceTree = "<group>"; };
 		1372A6B22B030F1A00ACF1E6 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		1372A6B72B0312E100ACF1E6 /* BookSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchViewModel.swift; sourceTree = "<group>"; };
@@ -51,12 +56,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				130B4E362B04876000DBFD57 /* SDWebImageMapKit in Frameworks */,
+				130B4E342B04876000DBFD57 /* SDWebImage in Frameworks */,
+				130D91442B04C80A009A0BF1 /* AlamofireImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		132C84E32B050E3D00D49A21 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				132C84E42B050E6900D49A21 /* Baskerville.ttc */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		1372A6B42B03108F00ACF1E6 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +101,7 @@
 		138F1BCF2B021ABF007BC8F9 /* BookTree */ = {
 			isa = PBXGroup;
 			children = (
+				132C84E32B050E3D00D49A21 /* Font */,
 				138F1BDC2B021AC1007BC8F9 /* Assets.xcassets */,
 				138F1BD02B021ABF007BC8F9 /* AppDelegate.swift */,
 				138F1BD22B021ABF007BC8F9 /* SceneDelegate.swift */,
@@ -161,6 +178,11 @@
 			dependencies = (
 			);
 			name = BookTree;
+			packageProductDependencies = (
+				130B4E332B04876000DBFD57 /* SDWebImage */,
+				130B4E352B04876000DBFD57 /* SDWebImageMapKit */,
+				130D91432B04C80A009A0BF1 /* AlamofireImage */,
+			);
 			productName = BookTree;
 			productReference = 138F1BCD2B021ABF007BC8F9 /* BookTree.app */;
 			productType = "com.apple.product-type.application";
@@ -189,6 +211,10 @@
 				Base,
 			);
 			mainGroup = 138F1BC42B021ABF007BC8F9;
+			packageReferences = (
+				130B4E322B04876000DBFD57 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				130D91422B04C80A009A0BF1 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
+			);
 			productRefGroup = 138F1BCE2B021ABF007BC8F9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -205,6 +231,7 @@
 			files = (
 				138F1BE02B021AC1007BC8F9 /* LaunchScreen.storyboard in Resources */,
 				138F1BDD2B021AC1007BC8F9 /* Assets.xcassets in Resources */,
+				132C84E52B050E6900D49A21 /* Baskerville.ttc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,6 +470,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		130B4E322B04876000DBFD57 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		130D91422B04C80A009A0BF1 /* XCRemoteSwiftPackageReference "AlamofireImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/AlamofireImage.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		130B4E332B04876000DBFD57 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 130B4E322B04876000DBFD57 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		130B4E352B04876000DBFD57 /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 130B4E322B04876000DBFD57 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
+		};
+		130D91432B04C80A009A0BF1 /* AlamofireImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 130D91422B04C80A009A0BF1 /* XCRemoteSwiftPackageReference "AlamofireImage" */;
+			productName = AlamofireImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		138F1BD92B021ABF007BC8F9 /* BookTree.xcdatamodeld */ = {

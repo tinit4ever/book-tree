@@ -8,21 +8,10 @@
 import UIKit
 import SwiftUI
 import Combine
+import SDWebImage
 
 class BookDetailViewController: UIViewController {
-    //    var selectedUrl: String?
-    //    private let bookDetailViewModel: BookDetailViewModel
-    //    private var cancellables: Set<AnyCancellable> = []
-    //
-    //    init(bookDetailViewModel: BookDetailViewModel) {
-    //        self.bookDetailViewModel = bookDetailViewModel
-    //        super.init(nibName: nil, bundle: nil)
-    //    }
-    //
-    //    required init?(coder: NSCoder) {
-    //        fatalError("init(coder:) has not been implemented")
-    //    }
-    
+    var book: BookAPI?
     // MARK: - Create UI Component
     
     lazy var stackView: UIStackView = {
@@ -37,10 +26,11 @@ class BookDetailViewController: UIViewController {
     
     lazy var imageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
-        imageView.image = UIImage(named: "sampleImage")
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 10
         imageView.backgroundColor = .black
+        imageView.layer.borderWidth = 2
+        imageView.layer.borderColor = UIColor.black.cgColor
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -50,6 +40,10 @@ class BookDetailViewController: UIViewController {
         let label = UILabel()
         label.textColor = .black
         label.text = "Title"
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.font = UIFont(name: "Arial Rounded MT Bold", size: 24)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -58,6 +52,9 @@ class BookDetailViewController: UIViewController {
         let label = UILabel()
         label.textColor = .gray
         label.text = "Author"
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
+        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -83,7 +80,7 @@ class BookDetailViewController: UIViewController {
     lazy var pageCountTitleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .gray
-        label.text = "Page"
+        label.text = "Pages"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -91,7 +88,7 @@ class BookDetailViewController: UIViewController {
     lazy var pageCountContentLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.text = "400"
+        label.font = UIFont(name: "Arial Rounded MT Bold", size: 22)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -117,7 +114,7 @@ class BookDetailViewController: UIViewController {
     lazy var languageContentLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.text = "EN"
+        label.font = UIFont(name: "Arial Rounded MT Bold", size: 22)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -143,7 +140,7 @@ class BookDetailViewController: UIViewController {
     lazy var releaseContentLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.text = "2023-01-01"
+        label.font = UIFont(name: "Arial Rounded MT Bold", size: 22)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -153,6 +150,8 @@ class BookDetailViewController: UIViewController {
         scrollView.isScrollEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = true
+        scrollView.layer.cornerRadius = 20
+        scrollView.backgroundColor = .systemGray6
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
@@ -162,6 +161,7 @@ class BookDetailViewController: UIViewController {
         label.textColor = .black
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
+        label.font = UIFont(name: "Chalkboard SE", size: 22)
         label.text = "Sure, here is a one-paragraph summary of The 7 Habits of Highly Effective People: To achieve personal and professional success, Stephen R. Covey advocates for adopting seven key principles: proactive responsibility for one's life, starting with a clear vision of goals, prioritizing tasks based on importance, seeking mutually beneficial solutions, listening empathetically before communicating, valuing others' strengths for collaboration, and continuous self-improvement in all aspects of life. Sure, here is a one-paragraph summary of The 7 Habits of Highly Effective People: To achieve personal and professional success, Stephen R. Covey advocates for adopting seven key principles: proactive responsibility for one's life, starting with a clear vision of goals, prioritizing tasks based on importance, seeking mutually beneficial solutions, listening empathetically before communicating, valuing others' strengths for collaboration, and continuous self-improvement in all aspects of life. Sure, here is a one-paragraph summary of The 7 Habits of Highly Effective People: To achieve personal and professional success, Stephen R. Covey advocates for adopting seven key principles: proactive responsibility for one's life, starting with a clear vision of goals, prioritizing tasks based on importance, seeking mutually beneficial solutions, listening empathetically before communicating, valuing others' strengths for collaboration, and continuous self-improvement in all aspects of life"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -171,7 +171,7 @@ class BookDetailViewController: UIViewController {
         let view = UIView()
         view.backgroundColor = .gray
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.widthAnchor.constraint(equalToConstant: 2).isActive = true
+        view.widthAnchor.constraint(equalToConstant: 1).isActive = true
         return view
     }()
     
@@ -179,7 +179,7 @@ class BookDetailViewController: UIViewController {
         let view = UIView()
         view.backgroundColor = .gray
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.widthAnchor.constraint(equalToConstant: 2).isActive = true
+        view.widthAnchor.constraint(equalToConstant: 1).isActive = true
         return view
     }()
     
@@ -188,7 +188,7 @@ class BookDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        //        setupData()
+        setupData()
     }
     
     // MARK: - Setup UI
@@ -203,6 +203,8 @@ class BookDetailViewController: UIViewController {
         
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(authorLabel)
+        setupTitleAndAuthorLabel()
+        
         view.addSubview(contentStackView)
         setupContentStackView()
         
@@ -225,6 +227,15 @@ class BookDetailViewController: UIViewController {
         ])
     }
     
+    func setupTitleAndAuthorLabel() {
+        NSLayoutConstraint.activate([
+            titleLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 20),
+            titleLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -20),
+            authorLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 20),
+            authorLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -20)
+        ])
+    }
+    
     func setupContentStackView() {
         contentStackView.addArrangedSubview(pageCountStack)
         contentStackView.addArrangedSubview(dividerView)
@@ -233,7 +244,7 @@ class BookDetailViewController: UIViewController {
         contentStackView.addArrangedSubview(releaseStack)
         NSLayoutConstraint.activate([
             contentStackView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 20),
-            contentStackView.heightAnchor.constraint(equalToConstant: 40),
+            contentStackView.heightAnchor.constraint(equalToConstant: 50),
             languageStack.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
@@ -241,43 +252,45 @@ class BookDetailViewController: UIViewController {
     func setupDescriptionScrollView() {
         NSLayoutConstraint.activate([
             descriptionScrollView.topAnchor.constraint(equalTo: contentStackView.bottomAnchor, constant: 20),
-            descriptionScrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            descriptionScrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             descriptionScrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            descriptionScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            descriptionScrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         descriptionScrollView.addSubview(descriptionLabel)
         
         NSLayoutConstraint.activate([
-            descriptionLabel.topAnchor.constraint(equalTo: descriptionScrollView.topAnchor),
-            descriptionLabel.leadingAnchor.constraint(equalTo: descriptionScrollView.leadingAnchor),
-            descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            descriptionLabel.topAnchor.constraint(equalTo: descriptionScrollView.topAnchor, constant: 10),
+            descriptionLabel.leadingAnchor.constraint(equalTo: descriptionScrollView.leadingAnchor, constant: 20),
+            descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             descriptionLabel.bottomAnchor.constraint(equalTo: descriptionScrollView.bottomAnchor),
         ])
     }
     
-    // MARK: - Setup Data
+    //     MARK: - Setup Data
     
-    //    func setupData() {
-    //        guard let url = selectedUrl else {
-    //            return
-    //        }
-    //        bookDetailViewModel.setUrl(url)
-    //        bookDetailViewModel.$loadingDetailCompleted
-    //            .receive(on: DispatchQueue.main)
-    //            .sink { [weak self] completed in
-    //                if completed {
-    //                    self?.descriptionLabel.text = self?.bookDetailViewModel.book?.volumeInfo?.description
-    //                }
-    //            }
-    //            .store(in: &cancellables)
-    //    }
+    func setupData() {
+        if let url = URL(string: (book?.volumeInfo?.imageLinks!.thumbnail) ?? "") {
+            imageView.sd_setImage(with: url)
+        } else {
+            imageView.image = UIImage(named: "NAImage")
+        }
+        titleLabel.text = book?.volumeInfo?.title ?? "N/A"
+        authorLabel.text = book?.volumeInfo?.authors?.joined(separator: ",") ?? "N/A"
+        pageCountContentLabel.text = String(book?.volumeInfo?.pageCount ?? 0)
+        languageContentLabel.text = book?.volumeInfo?.language?.uppercased() ?? "N/A"
+        
+        let releaseDateString: String = book?.volumeInfo?.publishedDate ?? "N/A"
+        releaseContentLabel.text = String(releaseDateString.prefix(4))
+        descriptionLabel.text = book?.volumeInfo?.description ?? "N/A"
+    }
 }
 
 // -MARK: Preview
 struct BookDetailsViewControllerPreview: PreviewProvider {
     static var previews: some View {
         VCPreview {
-            BookDetailViewController()
+            let bookDetailViewController = BookDetailViewController()
+            return bookDetailViewController
         }
     }
 }
