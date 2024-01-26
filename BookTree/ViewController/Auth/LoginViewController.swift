@@ -7,10 +7,14 @@
 
 import UIKit
 import SwiftUI
-//import FirebaseAuth
+import Combine
+import LocalAuthentication
 
 class LoginViewController: UIViewController {
+    
     var viewModel: LoginViewModelProtocol?
+    
+    var cancellables: Set<AnyCancellable> = []
     
     private lazy var backgroundImage: UIImageView = {
         let imageView = UIImageView(frame: .zero)
@@ -73,6 +77,14 @@ class LoginViewController: UIViewController {
         return textField
     }()
     
+    private lazy var loginStack: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 20
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     private lazy var loginButton: UIButton = {
         let button = UIButton()
         
@@ -83,6 +95,12 @@ class LoginViewController: UIViewController {
         button.configuration = configuration
         button.translatesAutoresizingMaskIntoConstraints = false
         
+        return button
+    }()
+    
+    private lazy var biometricLoginButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -101,13 +119,12 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
         setupUI()
         setupAction()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        errorLabel.isHidden = true
+        errorLabel.isHidden = false
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -116,6 +133,7 @@ class LoginViewController: UIViewController {
     
     // SetupUI
     func setupUI() {
+        view.backgroundColor = .systemBackground
         view.addSubview(backgroundImage)
         
         let gifImage = UIImage.gifImageWithName("book")
@@ -129,7 +147,11 @@ class LoginViewController: UIViewController {
         
         stackView.addArrangedSubview(mailTextField)
         stackView.addArrangedSubview(passwordTextField)
-        stackView.addArrangedSubview(loginButton)
+        
+        stackView.addArrangedSubview(loginStack)
+        configureLoginStack()
+        
+        //        stackView.addArrangedSubview(loginButton)
         stackView.addArrangedSubview(errorLabel)
         view.addSubview(stackView)
         NSLayoutConstraint.activate([
@@ -139,23 +161,75 @@ class LoginViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
+            loginStack.heightAnchor.constraint(equalToConstant: 40),
             loginButton.heightAnchor.constraint(equalToConstant: 40),
-            mailTextField.heightAnchor.constraint(equalTo: loginButton.heightAnchor),
-            passwordTextField.heightAnchor.constraint(equalTo: loginButton.heightAnchor)
+            biometricLoginButton.widthAnchor.constraint(equalToConstant: 40),
+            mailTextField.heightAnchor.constraint(equalToConstant: 40),
+            passwordTextField.heightAnchor.constraint(equalToConstant: 40)
         ])
+    }
+    
+    func configureLoginStack() {
+        var configuration = UIButton.Configuration.gray()
         
+        let authContext = LAContext()
+        var error: NSError?
+        
+        if authContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            if authContext.biometryType == .touchID {
+                configuration.image = UIImage(systemName: "touchid")
+            } else if authContext.biometryType == .faceID {
+                configuration.image = UIImage(systemName: "faceid")
+            }
+        }
+        biometricLoginButton.configuration = configuration
+        
+        loginStack.addArrangedSubview(loginButton)
+        loginStack.addArrangedSubview(biometricLoginButton)
     }
     
     // Setup Action
     func setupAction() {
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        biometricLoginButton.addTarget(self, action: #selector(biometricLoginButtonTapped), for: .touchUpInside)
     }
     
     func setViewModel(viewModel: LoginViewModelProtocol) {
         self.viewModel = viewModel
     }
     
-    // Catch Action
+    @objc
+    func biometricLoginButtonTapped() {
+        let context = LAContext()
+        var error: NSError? = nil
+        
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            let reason = "Please authorize with touch ID"
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { [weak self] success, error in
+                guard success, error == nil else {
+                    let alert = UIAlertController(title: "Fail to authenticate", message: "Please try again.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+                    self?.present(alert, animated: true)
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    UserDefaults.standard.set(true, forKey: UserDefaultKeys.isLoggedIn)
+                    let mainViewController = MainTabBarViewController()
+                    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                        let window = windowScene.windows.first
+                        window?.rootViewController = mainViewController
+                        window?.makeKeyAndVisible()
+                    }
+                }
+            }
+        } else {
+            let alert = UIAlertController(title: "Unavailable", message: "You cant use this feature", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+            present(alert, animated: true)
+        }
+    }
+    
     @objc
     func loginButtonTapped() {
         guard let mail = mailTextField.text,
@@ -163,26 +237,30 @@ class LoginViewController: UIViewController {
             return
         }
         
-        viewModel?.login(mail, password) { errorString in
-            if let errorString = errorString {
-                DispatchQueue.main.async { [self] in
-                    errorLabel.isHidden = false
-                    errorLabel.text = errorString
+        viewModel?.login(mail, password)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    self.showError(error.localizedDescription)
                 }
-            } else {
+            }, receiveValue: { _ in
                 UserDefaults.standard.set(true, forKey: UserDefaultKeys.isLoggedIn)
                 let mainViewController = MainTabBarViewController()
-                DispatchQueue.main.async {
-                    //                    self.navigationController?.setViewControllers([mainViewController], animated: true)
-                    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-                        let window = windowScene.windows.first
-                        window?.rootViewController = mainViewController
-                        window?.makeKeyAndVisible()
-                    }
-
+                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                    let window = windowScene.windows.first
+                    window?.rootViewController = mainViewController
+                    window?.makeKeyAndVisible()
                 }
-            }
-        }
+            })
+            .store(in: &cancellables)
+    }
+    
+    private func showError(_ message: String) {
+        errorLabel.isHidden = false
+        errorLabel.text = message
     }
     
     @objc

@@ -13,6 +13,9 @@
 		1372A6AD2B03041F00ACF1E6 /* BookSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1372A6AC2B03041F00ACF1E6 /* BookSearchViewController.swift */; };
 		1372A6B32B030F1A00ACF1E6 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1372A6B22B030F1A00ACF1E6 /* Book.swift */; };
 		1372A6B82B0312E100ACF1E6 /* BookSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1372A6B72B0312E100ACF1E6 /* BookSearchViewModel.swift */; };
+		13753DB02B07047E00E34A61 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13753DAF2B07047E00E34A61 /* ProfileViewController.swift */; };
+		13753DB22B0708C500E34A61 /* ImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13753DB12B0708C500E34A61 /* ImageView+Extensions.swift */; };
+		13753DB42B07193F00E34A61 /* ProffileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13753DB32B07193F00E34A61 /* ProffileEditViewController.swift */; };
 		1376BEB22B05F3470079AB22 /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1376BEB12B05F3470079AB22 /* BookTableViewCell.swift */; };
 		138F1BD12B021ABF007BC8F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138F1BD02B021ABF007BC8F9 /* AppDelegate.swift */; };
 		138F1BD32B021ABF007BC8F9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138F1BD22B021ABF007BC8F9 /* SceneDelegate.swift */; };
@@ -22,7 +25,7 @@
 		139DC1C62B02275600B03F7A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139DC1C52B02275600B03F7A /* HomeViewController.swift */; };
 		139DC1C82B022D4D00B03F7A /* VCPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139DC1C72B022D4D00B03F7A /* VCPreview.swift */; };
 		139DC1CA2B022F1B00B03F7A /* BookCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139DC1C92B022F1B00B03F7A /* BookCollectionViewCell.swift */; };
-		13B37C432B03C96900CAD46D /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B37C422B03C96900CAD46D /* UIStackView+Extensions.swift */; };
+		13CCA3C82B0B4ED00017529D /* LAContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CCA3C72B0B4ED00017529D /* LAContext+Extensions.swift */; };
 		13DE94202B035D23003DCA03 /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DE941F2B035D23003DCA03 /* BookDetailViewController.swift */; };
 		13DE94222B035DD1003DCA03 /* BookDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DE94212B035DD1003DCA03 /* BookDetailViewModel.swift */; };
 		13DE94242B036BEC003DCA03 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DE94232B036BEC003DCA03 /* APICaller.swift */; };
@@ -56,6 +59,9 @@
 		1372A6AC2B03041F00ACF1E6 /* BookSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchViewController.swift; sourceTree = "<group>"; };
 		1372A6B22B030F1A00ACF1E6 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		1372A6B72B0312E100ACF1E6 /* BookSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchViewModel.swift; sourceTree = "<group>"; };
+		13753DAF2B07047E00E34A61 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		13753DB12B0708C500E34A61 /* ImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageView+Extensions.swift"; sourceTree = "<group>"; };
+		13753DB32B07193F00E34A61 /* ProffileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProffileEditViewController.swift; sourceTree = "<group>"; };
 		1376BEB12B05F3470079AB22 /* BookTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableViewCell.swift; sourceTree = "<group>"; };
 		138F1BCD2B021ABF007BC8F9 /* BookTree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookTree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		138F1BD02B021ABF007BC8F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -67,7 +73,7 @@
 		139DC1C52B02275600B03F7A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		139DC1C72B022D4D00B03F7A /* VCPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCPreview.swift; sourceTree = "<group>"; };
 		139DC1C92B022F1B00B03F7A /* BookCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCollectionViewCell.swift; sourceTree = "<group>"; };
-		13B37C422B03C96900CAD46D /* UIStackView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extensions.swift"; sourceTree = "<group>"; };
+		13CCA3C72B0B4ED00017529D /* LAContext+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LAContext+Extensions.swift"; sourceTree = "<group>"; };
 		13DE941F2B035D23003DCA03 /* BookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
 		13DE94212B035DD1003DCA03 /* BookDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewModel.swift; sourceTree = "<group>"; };
 		13DE94232B036BEC003DCA03 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
@@ -121,10 +127,30 @@
 			isa = PBXGroup;
 			children = (
 				13DE94252B036C32003DCA03 /* String+Extensions.swift */,
-				13B37C422B03C96900CAD46D /* UIStackView+Extensions.swift */,
 				13E68F912B05ADC8008A7013 /* GIF.swift */,
+				13753DB12B0708C500E34A61 /* ImageView+Extensions.swift */,
+				13CCA3C72B0B4ED00017529D /* LAContext+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		13753DAD2B07040800E34A61 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				139DC1C52B02275600B03F7A /* HomeViewController.swift */,
+				13753DAF2B07047E00E34A61 /* ProfileViewController.swift */,
+				13753DB32B07193F00E34A61 /* ProffileEditViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		13753DAE2B07040D00E34A61 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				1372A6AC2B03041F00ACF1E6 /* BookSearchViewController.swift */,
+				13DE941F2B035D23003DCA03 /* BookDetailViewController.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		138F1BC42B021ABF007BC8F9 = {
@@ -197,13 +223,12 @@
 		139DC1C32B02270900B03F7A /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				13E68F562B05AA63008A7013 /* ViewController.swift */,
-				13E68F972B05B3A6008A7013 /* Login */,
-				139DC1C52B02275600B03F7A /* HomeViewController.swift */,
-				1372A6AC2B03041F00ACF1E6 /* BookSearchViewController.swift */,
-				13DE941F2B035D23003DCA03 /* BookDetailViewController.swift */,
 				139DC1C72B022D4D00B03F7A /* VCPreview.swift */,
+				13E68F562B05AA63008A7013 /* ViewController.swift */,
 				13E68F9F2B05B73F008A7013 /* MainTabBarViewController.swift */,
+				13E68F972B05B3A6008A7013 /* Auth */,
+				13753DAE2B07040D00E34A61 /* Search */,
+				13753DAD2B07040800E34A61 /* Home */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -216,13 +241,13 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
-		13E68F972B05B3A6008A7013 /* Login */ = {
+		13E68F972B05B3A6008A7013 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
 				13E68F982B05B3D6008A7013 /* LoginViewController.swift */,
 				13E68FBC2B05C102008A7013 /* SignUpViewController.swift */,
 			);
-			path = Login;
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		13E68F9C2B05B562008A7013 /* Singleton */ = {
@@ -327,6 +352,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13CCA3C82B0B4ED00017529D /* LAContext+Extensions.swift in Sources */,
 				13E68F572B05AA63008A7013 /* ViewController.swift in Sources */,
 				139DC1C82B022D4D00B03F7A /* VCPreview.swift in Sources */,
 				13DE94262B036C32003DCA03 /* String+Extensions.swift in Sources */,
@@ -341,13 +367,15 @@
 				139DC1CA2B022F1B00B03F7A /* BookCollectionViewCell.swift in Sources */,
 				138F1BD12B021ABF007BC8F9 /* AppDelegate.swift in Sources */,
 				13E68F922B05ADC8008A7013 /* GIF.swift in Sources */,
+				13753DB42B07193F00E34A61 /* ProffileEditViewController.swift in Sources */,
 				1376BEB22B05F3470079AB22 /* BookTableViewCell.swift in Sources */,
+				13753DB02B07047E00E34A61 /* ProfileViewController.swift in Sources */,
 				138F1BD32B021ABF007BC8F9 /* SceneDelegate.swift in Sources */,
 				13E68FBD2B05C102008A7013 /* SignUpViewController.swift in Sources */,
 				1372A6B82B0312E100ACF1E6 /* BookSearchViewModel.swift in Sources */,
 				13E68F992B05B3D6008A7013 /* LoginViewController.swift in Sources */,
-				13B37C432B03C96900CAD46D /* UIStackView+Extensions.swift in Sources */,
 				1372A6AD2B03041F00ACF1E6 /* BookSearchViewController.swift in Sources */,
+				13753DB22B0708C500E34A61 /* ImageView+Extensions.swift in Sources */,
 				1372A6B32B030F1A00ACF1E6 /* Book.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

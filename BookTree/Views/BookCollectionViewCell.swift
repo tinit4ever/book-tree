@@ -31,7 +31,7 @@ class BookCollectionViewCell: UICollectionViewCell {
     
     func setupUI() {
         contentView.addSubview(imageView)
-        imageView.image = UIImage(named: "sampleImage")
+        imageView.image = UIImage(named: "NAImage")
 //        applyImageContrains()
     }
     

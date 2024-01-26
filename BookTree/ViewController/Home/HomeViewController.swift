@@ -10,12 +10,10 @@ import SwiftUI
 
 class HomeViewController: UIViewController {
     
-    let collectionView: UICollectionView = {
+    lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.itemSize = CGSize(width: 100, height: 150)
-        //        layout.sectionInset = UIEdgeInsets(top: layout.minimumLineSpacing, left: layout.minimumLineSpacing, bottom: layout.minimumLineSpacing, right: layout.minimumLineSpacing)
-        
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(BookCollectionViewCell.self, forCellWithReuseIdentifier: BookCollectionViewCell.identifier)
@@ -25,17 +23,28 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
         setupUI()
     }
+    
     func setupUI() {
+        view.backgroundColor = .systemBackground
+        
+        setupNavigationBar()
+        
         view.addSubview(collectionView)
         collectionView.delegate = self
         collectionView.dataSource = self
-        activeCollectionViewContrains()
+        setupCollectionView()
     }
     
-    func activeCollectionViewContrains() {
+    func setupNavigationBar() {
+        title = "My Book"
+        navigationController?.navigationBar.prefersLargeTitles = true
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Log Out", style: .plain, target: self, action: #selector(logoutButtonTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.circle"), style: .plain, target: self, action: #selector(profileButtonTapped))
+    }
+    
+    func setupCollectionView() {
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -43,6 +52,24 @@ class HomeViewController: UIViewController {
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
+    
+    // catch action
+    
+    @objc
+    func profileButtonTapped() {
+        self.navigationController?.pushViewController(ProfileViewController(), animated: true)
+    }
+    
+    @objc
+    func logoutButtonTapped() {
+        let viewController = ViewController()
+        UserDefaults().set(false, forKey: UserDefaultKeys.isLoggedIn)
+        UserDefaults.standard.removeObject(forKey: UserDefaultKeys.isLoggedIn)
+        DispatchQueue.main.async {
+            self.navigationController?.setViewControllers([viewController], animated: true)
+        }
+    }
+    
 }
 
 extension HomeViewController: UICollectionViewDelegate {
@@ -58,19 +85,16 @@ extension HomeViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookCollectionViewCell.identifier, for: indexPath) as? BookCollectionViewCell else {
             return UICollectionViewCell()
         }
-        //        cell.configure()
-        
         return cell
     }
-    
-    
 }
 
 // -MARK: Preview
 struct ViewControllerPreview: PreviewProvider {
     static var previews: some View {
         VCPreview {
-            HomeViewController()
+            let navController = UINavigationController(rootViewController: HomeViewController())
+            return navController
         }
     }
 }
